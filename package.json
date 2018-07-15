@@ -1,11 +1,20 @@
 {
   "name": "mume-cli",
   "version": "1.0.1",
-  "description": "markdown toolkit powered by Mume",
+  "description": "markdown toolkit powered by mume",
   "author": {
     "name": "stasson",
     "email": "sebastien.tasson@gmail.com"
   },
+  "keywords": [
+    "mume-cli",
+    "mume",
+    "cli",
+    "markdown",
+    "pdf",
+    "html",
+    "gfm"
+  ],
   "license": "MIT",
   "homepage": "https://github.com/stasson/mume-cli",
   "repository": {
