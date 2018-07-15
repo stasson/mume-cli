@@ -1,0 +1,73 @@
+{
+  "name": "mume-cli",
+  "version": "1.0.0",
+  "description": "markdown toolkit powered by Mume",
+  "author": {
+    "name": "stasson",
+    "email": "sebastien.tasson@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "bin": {
+    "mume": "dist/cli.js"
+  },
+  "scripts": {
+    "start": "ts-node src/cli.ts",
+    "build": "run-s build:*",
+    "build:clean": "rimraf dist",
+    "build:lib": "tsc -p tsconfig.json",
+    "test": "jest --runInBand",
+    "tdd": "jest --runInBand --watch",
+    "prettier": "prettier --write src/**/*",
+    "lint": "cross-env NODE_ENV=production tslint src/**/*.ts -t verbose",
+    "commit-lint": "commitlint",
+    "commit": "git cz",
+    "release": "standard-version"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "gitHooks": {
+    "commit-msg": "commitlint -E GIT_PARAMS"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^7.0.0",
+    "@commitlint/config-conventional": "^7.0.1",
+    "@types/jest": "^23.1.1",
+    "@types/node": "^10.5.2",
+    "caporal": "^0.10.0",
+    "commitizen": "^2.10.1",
+    "cross-env": "^5.2.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "fs-extra": "^6.0.1",
+    "jest": "^23.2.0",
+    "mkdirp": "^0.5.1",
+    "npm-run-all": "^4.1.3",
+    "prettier": "^1.13.6",
+    "rimraf": "^2.6.2",
+    "standard-version": "^4.4.0",
+    "ts-jest": "^22.4.6",
+    "ts-node-dev": "^1.0.0-pre.26",
+    "tslint": "^5.10.0",
+    "tslint-config-prettier": "^1.13.0",
+    "tslint-plugin-prettier": "^1.3.0",
+    "typescript": "^2.9.2",
+    "yorkie": "^1.0.3"
+  },
+  "dependencies": {
+    "@shd101wyy/mume": "^0.3.3",
+    "@types/fs-extra": "^5.0.4",
+    "globby": "^8.0.1"
+  }
+}
