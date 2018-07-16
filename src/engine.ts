@@ -109,10 +109,10 @@ export async function exportMarkdown(
       render = exportPdf;
       break;
     case 'html':
-      render = exportPdf;
+      render = exportHtml;
       break;
     case 'gmf':
-      render = exportPdf;
+      render = exportGfm;
       break;
     default:
       throw Error(`unknown format ${type}`);
