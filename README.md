@@ -5,6 +5,7 @@ CLI wrapper arround [mume](https://github.com/shd101wyy/mume), the tool powering
 - HTML export
 - GFM export _(consolidated Github flavored markdown)_
 - PDF export _(requires puppeteer to be installed globally)_
+- EBook export _(requires calibre's ebook-convert to be installed globally)_
 
 ## install
 
@@ -20,4 +21,5 @@ mume -h
 mume pdf --out public src/**/*.md
 mume html --out public src/**/*.md
 mume gfm --out docs src/**/*.md
+mume ebook epub/mobi/pdf/html README.md
 ```
