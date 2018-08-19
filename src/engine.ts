@@ -97,8 +97,18 @@ export async function exportGfm(
   });
 }
 
+export async function exportEbook(
+  filePath: string,
+  fileType: string,
+) {
+  const engine = await createEngine(filePath);
+  return engine.eBookExport({
+    fileType
+  });
+}
+
 export async function exportMarkdown(
-  type: 'pdf' | 'gmf' | 'html',
+  type: 'pdf' | 'gmf' | 'html' | 'ebook',
   args,
   options,
   logger
@@ -114,6 +124,9 @@ export async function exportMarkdown(
     case 'gmf':
       render = exportGfm;
       break;
+    case 'ebook':
+      await exportEbook(args.input, args.format);
+      return;
     default:
       throw Error(`unknown format ${type}`);
   }

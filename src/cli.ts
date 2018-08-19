@@ -25,8 +25,13 @@ prog
   .option('-o, --out <outdir>', 'output path')
   .action(async (args, options, logger) => {
     return exportMarkdown('gmf', args, options, logger);
+  })
+  .command('ebook', 'renders to ebook')
+  .argument('<format>', 'output file type (epub/mobi/pdf/html)', ["epub", "mobi", "pdf", "html"])
+  .argument('[input]', 'ebook index input file', null, 'README.md')
+  .action(async (args, options, logger) => {
+    return exportMarkdown('ebook', args, options, logger);
   });
-
 
 // run
 async function run() {
