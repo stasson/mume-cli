@@ -7,26 +7,31 @@ const version = require('../package.json').version;
 prog
   .version(version)
   .name('mume')
-  // PDF
-  .command('pdf', 'renders markdown  to pdf')
-  .argument('<markdown...>', 'markdown path or glob pattern')
-  .option('-o, --out <outdir>', 'output path')
-  .action(async (args, options, logger) => {
-    return exportMarkdown('pdf', args, options, logger);
-  })
+  // HTML
   .command('html', 'renders markdown to html')
-  .argument('<markdown...>', 'markdown path or glob pattern')
+  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
   .option('-o, --out <outdir>', 'output path')
   .action(async (args, options, logger) => {
     return exportMarkdown('html', args, options, logger);
   })
+  // GFM
   .command('gfm', 'renders to Github flavored markdown')
-  .argument('<markdown...>', 'markdown path or glob pattern')
+  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
   .option('-o, --out <outdir>', 'output path')
   .action(async (args, options, logger) => {
     return exportMarkdown('gmf', args, options, logger);
   })
+  // PDF
+  .command('pdf', 'renders markdown  to pdf')
+  .help('requires puppeteer to be installed globally')
+  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
+  .option('-o, --out <outdir>', 'output path')
+  .action(async (args, options, logger) => {
+    return exportMarkdown('pdf', args, options, logger);
+  })
+  // ebook
   .command('ebook', 'renders to ebook')
+  .help('requires calibre to be installed globally')
   .argument('<format>', 'output file type (epub/mobi/pdf/html)', ["epub", "mobi", "pdf", "html"])
   .argument('[input]', 'ebook index input file', null, 'README.md')
   .action(async (args, options, logger) => {
