@@ -99,11 +99,16 @@ export async function exportGfm(
 
 export async function exportEbook(
   filePath: string,
-  fileType: string,
+  options: {
+    fileType: string;
+    runAllCodeChunks?: boolean;
+  } = { fileType: 'pdf' }
 ) {
+  const { fileType, runAllCodeChunks } = options;
   const engine = await createEngine(filePath);
   return engine.eBookExport({
-    fileType
+    fileType,
+    runAllCodeChunks
   });
 }
 
@@ -125,17 +130,16 @@ export async function exportMarkdown(
       render = exportGfm;
       break;
     case 'ebook':
-      await exportEbook(args.input, args.format);
+      render = md => exportEbook(md, { fileType: args.format || 'pdf' });
       return;
     default:
       throw Error(`unknown format ${type}`);
   }
 
   const files = [];
-  for (const pattern of args.markdown) {
-    const paths = await globby([pattern]);
-    paths.forEach(p => files.push(p));
-  }
+  const patterns = args.input.trim().split(' ');
+  const paths = await globby(patterns);
+  paths.forEach(p => files.push(p));
 
   options.out && files.length && (await fs.mkdirp(options.out));
   for (const md of files) {

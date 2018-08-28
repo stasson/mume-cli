@@ -32,8 +32,13 @@ prog
   // ebook
   .command('ebook', 'renders to ebook')
   .help('requires calibre to be installed globally')
-  .argument('<format>', 'output file type (epub/mobi/pdf/html)', ["epub", "mobi", "pdf", "html"])
-  .argument('[input]', 'ebook index input file', null, 'README.md')
+  .argument('<format>', 'output file type (epub/mobi/pdf/html)', [
+    'epub',
+    'mobi',
+    'pdf',
+    'html'
+  ])
+  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
   .action(async (args, options, logger) => {
     return exportMarkdown('ebook', args, options, logger);
   });
