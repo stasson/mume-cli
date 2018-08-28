@@ -137,8 +137,8 @@ export async function exportMarkdown(
   }
 
   const files = [];
-  const patterns = args.input.trim().split(' ');
-  const paths = await globby(patterns);
+  const input = args.input.length ? args.input : ['README.md'];
+  const paths = await globby(input);
   paths.forEach(p => files.push(p));
 
   options.out && files.length && (await fs.mkdirp(options.out));

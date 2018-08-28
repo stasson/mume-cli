@@ -9,14 +9,14 @@ prog
   .name('mume')
   // HTML
   .command('html', 'renders markdown to html')
-  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
+  .argument('[input...]', 'markdown path or glob pattern')
   .option('-o, --out <outdir>', 'output path')
   .action(async (args, options, logger) => {
     return exportMarkdown('html', args, options, logger);
   })
   // GFM
   .command('gfm', 'renders to Github flavored markdown')
-  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
+  .argument('[input...]', 'markdown path or glob pattern')
   .option('-o, --out <outdir>', 'output path')
   .action(async (args, options, logger) => {
     return exportMarkdown('gmf', args, options, logger);
@@ -24,7 +24,7 @@ prog
   // PDF
   .command('pdf', 'renders markdown  to pdf')
   .help('requires puppeteer to be installed globally')
-  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
+  .argument('[input...]', 'markdown path or glob pattern')
   .option('-o, --out <outdir>', 'output path')
   .action(async (args, options, logger) => {
     return exportMarkdown('pdf', args, options, logger);
@@ -38,7 +38,7 @@ prog
     'pdf',
     'html'
   ])
-  .argument('[input]', 'markdown path or glob pattern', null, 'README.md')
+  .argument('[input...]', 'markdown path or glob pattern')
   .action(async (args, options, logger) => {
     return exportMarkdown('ebook', args, options, logger);
   });
