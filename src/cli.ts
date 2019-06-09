@@ -21,6 +21,14 @@ prog
   .action(async (args, options, logger) => {
     return exportMarkdown('gmf', args, options, logger);
   })
+  // GFM
+  .command('pandoc', 'convert markdown using pandoc')
+  .help('requires pandoc to be installed globally')
+  .argument('[input...]', 'markdown path or glob pattern')
+  .option('-o, --out <outdir>', 'output path')
+  .action(async (args, options, logger) => {
+    return exportMarkdown('pandoc', args, options, logger);
+  })
   // PDF
   .command('pdf', 'renders markdown  to pdf')
   .help('requires puppeteer to be installed globally')

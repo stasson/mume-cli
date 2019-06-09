@@ -1,8 +1,7 @@
-import * as globby from 'globby';
+import { init, MarkdownEngine, MarkdownEngineConfig } from '@shd101wyy/mume';
 import * as fs from 'fs-extra';
+import * as globby from 'globby';
 import * as path from 'path';
-
-import { MarkdownEngine, MarkdownEngineConfig, init } from '@shd101wyy/mume';
 
 export { MarkdownEngine, MarkdownEngineConfig };
 
@@ -97,6 +96,20 @@ export async function exportGfm(
   });
 }
 
+export async function exportPandoc(
+  filePath: string,
+  options: {
+    projectDirectoryPath?: string;
+    runAllCodeChunks?: boolean;
+  } = {}
+) {
+  const { projectDirectoryPath, runAllCodeChunks } = options;
+  const engine = await createEngine(filePath, projectDirectoryPath);
+  return engine.pandocExport({
+    runAllCodeChunks
+  });
+}
+
 export async function exportEbook(
   filePath: string,
   options: {
@@ -113,7 +126,7 @@ export async function exportEbook(
 }
 
 export async function exportMarkdown(
-  type: 'pdf' | 'gmf' | 'html' | 'ebook',
+  type: 'pdf' | 'gmf' | 'html' | 'ebook' | 'pandoc',
   args,
   options,
   logger
@@ -128,6 +141,9 @@ export async function exportMarkdown(
       break;
     case 'gmf':
       render = exportGfm;
+      break;
+    case 'pandoc':
+      render = exportPandoc;
       break;
     case 'ebook':
       render = md => exportEbook(md, { fileType: args.format || 'pdf' });
