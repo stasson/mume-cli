@@ -21,7 +21,7 @@ prog
   .action(async (args, options, logger) => {
     return exportMarkdown('gmf', args, options, logger);
   })
-  // GFM
+  // pandoc
   .command('pandoc', 'convert markdown using pandoc')
   .help('requires pandoc to be installed globally')
   .argument('[input...]', 'markdown path or glob pattern')
